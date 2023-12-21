@@ -10,12 +10,32 @@
 
 float A, B, C;
 
+/* this following seciton is to start implementing the Bresenham line drawing algorithm */
+
+int edges[][2] = {
+    {0, 1}, {1, 2}, {2, 3}, {3, 0}, {4, 5}, {5, 6}, {6, 7}, {7, 4}, {0, 4}, {1, 5}, {2, 6}, {3, 7}};
+
+typedef struct
+{
+    float x, y, z;
+} Vertex;
+
+/* Vertex vertices[] = {
+    {-cubeWidth, -cubeWidth, -cubeWidth},
+    {cubeWidth, -cubeWidth, -cubeWidth},
+    {cubeWidth, cubeWidth, -cubeWidth},
+    {-cubeWidth, cubeWidth, -cubeWidth},
+    {-cubeWidth, -cubeWidth, cubeWidth},
+    {cubeWidth, -cubeWidth, cubeWidth},
+    {cubeWidth, cubeWidth, cubeWidth},
+    {-cubeWidth, cubeWidth, cubeWidth}}; */
+
 float cubeWidth = 10;
 int widthGeneral = 160, heightGeneral = 44;
 float zBuffer[160 * 44];
 char buffer[160 * 44];
 int backgroundASCIICode = ' ';
-int distanceFromCam = 60;
+int camDistance = 60;
 float K1 = 40;
 
 float incrementSpeed = 0.6;
@@ -49,7 +69,7 @@ void calculateForSurface(float cubeX, float cubeY, float cubeZ, char ch)
     // Calculates projections
     x = calculateX(cubeX, cubeY, cubeZ);
     y = calculateY(cubeX, cubeY, cubeZ);
-    z = calculateZ(cubeX, cubeY, cubeZ) + distanceFromCam;
+    z = calculateZ(cubeX, cubeY, cubeZ) + camDistance;
     ooz = 1 / z;
 
     // Corrects the aspect ratio, migth have to adjust once other sides are programmed
@@ -74,6 +94,13 @@ void calculateForSurface(float cubeX, float cubeY, float cubeZ, char ch)
         }
     }
 }
+
+void drawline()
+{
+    // figure out how to implement line drawing algorithm using vertices.
+    return 0;
+}
+
 int main()
 // handles the logic for printing the projections.
 {
