@@ -98,7 +98,6 @@ void calculateForSurface(float cubeX, float cubeY, float cubeZ, char ch)
 void drawline()
 {
     // figure out how to implement line drawing algorithm using vertices.
-    return 0;
 }
 
 int main()
