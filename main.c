@@ -1,6 +1,5 @@
 // @Author: Adam Fuzesi
 // @Date: 12/19/2023
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,17 +44,25 @@ float calculateZ(int i, int j, int k)
     return k * cos(A) * cos(B) - j * sin(A) * cos(B) + i * sin(B);
 }
 
-void calculateForSurface(float cubeX, float cubeY, float cubeZ, int ch)
+void calculateForSurface(float cubeX, float cubeY, float cubeZ, char ch)
 {
+    // Calculates projections
     x = calculateX(cubeX, cubeY, cubeZ);
     y = calculateY(cubeX, cubeY, cubeZ);
     z = calculateZ(cubeX, cubeY, cubeZ) + distanceFromCam;
-
     ooz = 1 / z;
 
-    xp = (int)(widthGeneral / 2 + K1 * ooz * x * 2);
-    yp = (int)(heightGeneral / 2 + K1 * ooz * y);
+    // Corrects the aspect ratio, migth have to adjust once other sides are programmed
+    float aspectRatio = (float)heightGeneral / (float)widthGeneral;
 
+    // Centering the cube
+    xp = (int)(widthGeneral / 2 + (K1 * ooz * x));
+    // Vertical offset centers the projection by lowering it
+    int verticalOffset = 10;
+    // Example offset, adjust as needed
+    yp = (int)(heightGeneral / 2 - (K1 * ooz * y * aspectRatio)) + verticalOffset;
+
+    // Buffer index's calculation
     idx = xp + yp * widthGeneral;
 
     if (idx >= 0 && idx < widthGeneral * heightGeneral)
@@ -67,8 +74,8 @@ void calculateForSurface(float cubeX, float cubeY, float cubeZ, int ch)
         }
     }
 }
-
 int main()
+// handles the logic for printing the projections.
 {
     printf("\x1b[2J");
     while (1)
@@ -79,7 +86,7 @@ int main()
         {
             for (float cubeY = -cubeWidth; cubeY < cubeWidth; cubeY += incrementSpeed)
             {
-                calculateForSurface(cubeX, cubeY, -cubeWidth, '#');
+                calculateForSurface(cubeX, cubeY, -cubeWidth, '.');
             }
         }
         printf("\x1b[H");
