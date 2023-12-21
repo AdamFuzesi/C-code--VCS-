@@ -87,6 +87,10 @@ int main()
             for (float cubeY = -cubeWidth; cubeY < cubeWidth; cubeY += incrementSpeed)
             {
                 calculateForSurface(cubeX, cubeY, -cubeWidth, '.');
+                calculateForSurface(cubeWidth, cubeY, cubeX, '#');
+                calculateForSurface(-cubeWidth, cubeX, -cubeY, '&');
+                calculateForSurface(-cubeX, cubeY, cubeWidth, '~');
+                calculateForSurface(cubeX, -cubeY, cubeWidth, '$');
             }
         }
         printf("\x1b[H");
