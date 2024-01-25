@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 
-// initialization of the used variables and constants
+// initialization of variables and constants
 
 float A, B, C;
 
@@ -72,7 +72,7 @@ void calculateForSurface(float cubeX, float cubeY, float cubeZ, char ch)
     z = calculateZ(cubeX, cubeY, cubeZ) + camDistance;
     ooz = 1 / z;
 
-    // Corrects the aspect ratio, migth have to adjust once other sides are programmed
+    // Corrects the aspect ratio, might have to adjust once other sides are programmed
     float aspectRatio = (float)heightGeneral / (float)widthGeneral;
 
     // Centering the cube
